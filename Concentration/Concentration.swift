@@ -31,7 +31,26 @@ class Concentration {
         }
         cards = shuffeled	
     }
-    var onlyFacedUpCardIndex :Int?
+    var onlyFacedUpCardIndex :Int? {
+        get {
+            var foundIndex: Int?
+            for index in cards.indices{
+                if cards[index].isFaceUp{
+                    if foundIndex == nil {
+                        foundIndex = index
+                    }else{
+                        return nil
+                    }
+                }
+            }
+            return foundIndex
+        }
+        set {
+            for index in cards.indices{
+                cards[index].isFaceUp = index == newValue
+            }
+        }
+    }
     
     func chooseCard(at index : Int){
         if !cards[index].isMatched{
@@ -43,14 +62,8 @@ class Concentration {
                     cards[index].isMatched = true
                 }
                 // not  matched for matched
-                onlyFacedUpCardIndex = nil
                 cards[index].isFaceUp = true
             } else {
-             // two wrong cards or no cards
-                for index in cards.indices {
-                    cards[index].isFaceUp = false
-                }
-                cards[index].isFaceUp = true
                 onlyFacedUpCardIndex = index
             }
         }
