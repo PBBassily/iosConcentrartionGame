@@ -16,6 +16,7 @@ class Concentration {
     }
     
     init(halfNumberOfCards : Int){
+        print(halfNumberOfCards)
         for _ in 1 ... halfNumberOfCards {
             let card = Card()
             cards += [card , card]
